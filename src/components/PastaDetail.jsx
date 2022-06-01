@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Button, Card, Col, Container, Row, Spinner } from 'react-bootstrap'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import dishes from '../data/menu.json'
+import PastaComments from './PastaComments'
 
 // I'm loading this component on a variety of routes, e.g:
 // /detail/0
@@ -21,6 +22,9 @@ const PastaDetail = () => {
   // componentDidMount -> useEffect(() => {}, [])
 
   const [pastaDetails, setPastaDetails] = useState(null) // 1)
+
+  // null it's the initial value. Then, after the useEffect, pastaDetails
+  // will become an object OR undefined, if the .find on dishes can't find a match (we should warn the user)
 
   useEffect(() => {
     // 2)
@@ -47,11 +51,16 @@ const PastaDetail = () => {
               <Card.Body>
                 <Card.Title>{pastaDetails.name}</Card.Title>
                 <Card.Text>{pastaDetails.description}</Card.Text>
+                <h5>REVIEWS:</h5>
+                <PastaComments selectedPasta={pastaDetails} />
                 <Button variant="primary" onClick={() => navigate('/menu')}>
                   Select another one!
                 </Button>
               </Card.Body>
             </Card>
+          ) : typeof pastaDetails === 'undefined' ? (
+            // the user didn't click on a pasta to come here....
+            <Navigate to="/not-found" />
           ) : (
             <Spinner variant="info" animation="border" />
           )}

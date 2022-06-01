@@ -9,6 +9,7 @@ import ReservationForm from './components/ReservationForm'
 import NotFound from './components/NotFound'
 import Menu from './components/Menu'
 import PastaDetail from './components/PastaDetail'
+import ClassExample from './components/ClassExample'
 
 // the curly brackets are necessary for importing a component that has been
 // exported NOT as default
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/form" element={<ReservationForm />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/detail/:pastaId" element={<PastaDetail />} />
+          <Route path="/class" element={<ClassExample />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </>

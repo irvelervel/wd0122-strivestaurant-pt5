@@ -4,6 +4,7 @@
 import { useState } from 'react'
 import { Carousel, Container, Row, Col, ListGroup } from 'react-bootstrap'
 import arrayOfPastas from '../data/menu.json'
+import PastaComments from './PastaComments'
 import ReservationForm from './ReservationForm'
 import ReservationsList from './ReservationsList'
 
@@ -63,20 +64,7 @@ const Home = () => {
       </Row>
       <Row className="mt-3 justify-content-center">
         <Col className="text-center" xs={12} md={6}>
-          <ListGroup>
-            {/* I want to generate as many ListGroup.Item as elements in the
-              comments array living in the selectedPasta in the state */}
-            {selectedPasta && // the short-circuit operator
-              selectedPasta.comments.map((review, i) => (
-                <ListGroup.Item key={i}>{review.comment}</ListGroup.Item>
-              ))}
-          </ListGroup>
-          {/* our page is crashing because initially this.state.selectedPasta
-            is null, and we told our interface to map the comments of it! */}
-          {/* you can fix it for example trying to read the comments property
-            JUST if this.state.selectedPasta is not null... */}
-          {/* DECLARATIVE APPROACH: we're telling the interface to ALWAYS
-            map the comments out of the selected pasta */}
+          <PastaComments selectedPasta={selectedPasta} />
         </Col>
       </Row>
     </Container>
